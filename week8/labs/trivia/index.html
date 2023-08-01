@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            function checkAnswerMultipleChoice(answer) {
+                var correctAnswer = "B"; // Replace with correct answer
+                var buttons = document.querySelectorAll(".multiple-choice button");
+                for (var i = 0; i < buttons.length; i++) {
+                    if (buttons[i].textContent === correctAnswer) {
+                        buttons[i].classList.add("correct");
+                    } else {
+                        buttons[i].classList.add("incorrect");
+                    }
+                    buttons[i].disabled = true;
+                }
+                if (answer === correctAnswer) {
+                    document.querySelector(".multiple-choice .result").textContent = "Correct!";
+                    document.querySelector(".multiple-choice .result").classList.add("correct");
+                } else {
+                    document.querySelector(".multiple-choice .result").textContent = "Incorrect";
+                    document.querySelector(".multiple-choice .result").classList.add("incorrect");
+                }
+            }
+
+            function checkAnswerFreeResponse(answer) {
+                var correctAnswer = "Berkeley"; // Replace with correct answer
+                var input = document.querySelector(".free-response input");
+                if (answer === correctAnswer) {
+                    input.classList.add("correct");
+                    document.querySelector(".free-response .result").textContent = "Correct!";
+                    document.querySelector(".free-response .result").classList.add("correct");
+                } else {
+                    input.classList.add("incorrect");
+                    document.querySelector(".free-response .result").textContent = "Incorrect";
+                    document.querySelector(".free-response .result").classList.add("incorrect");
+                }
+                input.disabled = true;
+                document.querySelector(".free-response button").disabled = true;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section multiple-choice">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the capital of California?</h3>
+                <button onclick="checkAnswerMultipleChoice('A')">Los Angeles</button>
+                <button onclick="checkAnswerMultipleChoice('B')">Sacramento</button>
+                <button onclick="checkAnswerMultipleChoice('C')">San Francisco</button>
+                <div class="result"></div>
+            </div>
+
+            <div class="section free-response">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the name of the university that offers CS61A?</h3>
+                <input type="text" placeholder="Type your answer here">
+                <button onclick="checkAnswerFreeResponse(document.querySelector('.free-response input').value)">Submit</button>
+                <div class="result"></div>
+            </div>
+        </div>
+    </body>
+</html>
